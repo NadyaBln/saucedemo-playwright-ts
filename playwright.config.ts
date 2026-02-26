@@ -31,7 +31,8 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     baseURL: "https://www.saucedemo.com",
-    headless: false,
+    // headed locally, headless in CI
+    headless: !!process.env.CI,
   },
 
   /* Configure projects for major browsers */
