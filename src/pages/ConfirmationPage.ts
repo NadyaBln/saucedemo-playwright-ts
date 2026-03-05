@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class ConfirmationPage extends BasePage {
@@ -27,10 +27,6 @@ export class ConfirmationPage extends BasePage {
 
   async getConfirmationMessageText(): Promise<string> {
     return (await this.completeText.textContent()) || "";
-  }
-
-  async expectToBeLoaded(): Promise<void> {
-    await expect(this.confirmationContainer).toBeVisible();
   }
 
   async backToProducts(): Promise<void> {

@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 import { ProductsPage } from "./ProductsPage";
 
@@ -47,10 +46,5 @@ export class LoginPage extends BasePage {
 
   async clearPassword(): Promise<void> {
     await this.passwordInput.clear();
-  }
-
-  async expectErrorMessageToContain(expectedText: string) {
-    await expect(this.errorMessage).toBeVisible();
-    await expect(this.errorMessage).toContainText(expectedText);
   }
 }

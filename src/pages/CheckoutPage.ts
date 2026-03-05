@@ -75,10 +75,6 @@ export class CheckoutPage extends BasePage {
     return (await this.errorMessage.textContent()) || "";
   }
 
-  async isErrorMessageVisible(): Promise<boolean> {
-    return await this.errorMessage.isVisible();
-  }
-
   async cancelCheckout(): Promise<void> {
     await this.cancelButton.click();
     await this.page.waitForLoadState();
@@ -103,14 +99,6 @@ export class CheckoutPage extends BasePage {
   async goBackFromStepTwo(): Promise<void> {
     await this.backButton.click();
     await this.page.waitForLoadState();
-  }
-
-  async isCheckoutStepOneVisible(): Promise<boolean> {
-    return await this.firstNameInput.isVisible();
-  }
-
-  async isCheckoutStepTwoVisible(): Promise<boolean> {
-    return await this.finishButton.isVisible();
   }
 
   async getCartItemsCountStepTwo(): Promise<number> {
