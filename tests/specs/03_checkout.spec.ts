@@ -1,9 +1,9 @@
-import { expect } from '@playwright/test';
-import { test } from '../fixtures/auth.fixture';
-import { PRODUCT_NAMES, CHECKOUT_INFO, SUCCESS_MESSAGES } from '../../src/utils/testData';
+import { expect } from "@playwright/test";
+import { test } from "../fixtures/auth.fixture";
+import { PRODUCT_NAMES, CHECKOUT_INFO, SUCCESS_MESSAGES } from "../../src/utils/testData";
 
-test.describe('SauceDemo - Complete Purchase Flow', () => {
-  test('should complete full purchase flow with single product', async ({
+test.describe("SauceDemo - Complete Purchase Flow", () => {
+  test("should complete full purchase flow with single product", async ({
     productsPage,
     navigationBar,
     cartPage,
@@ -40,12 +40,10 @@ test.describe('SauceDemo - Complete Purchase Flow', () => {
     await confirmationPage.expectToBeLoaded();
 
     const confirmationText = await confirmationPage.getConfirmationHeaderText();
-    expect(confirmationText.toLowerCase()).toContain(
-      SUCCESS_MESSAGES.ORDER_COMPLETE.toLowerCase(),
-    );
+    expect(confirmationText.toLowerCase()).toContain(SUCCESS_MESSAGES.ORDER_COMPLETE.toLowerCase());
   });
 
-  test('should complete purchase with multiple products', async ({
+  test("should complete purchase with multiple products", async ({
     productsPage,
     navigationBar,
     cartPage,
@@ -81,11 +79,7 @@ test.describe('SauceDemo - Complete Purchase Flow', () => {
     expect(checkoutItemCount).toBe(productsToAdd.length);
   });
 
-  test('should remove item from cart', async ({
-    productsPage,
-    navigationBar,
-    cartPage,
-  }) => {
+  test("should remove item from cart", async ({ productsPage, navigationBar, cartPage }) => {
     await productsPage.addProductToCartByName(PRODUCT_NAMES.BACKPACK);
     await productsPage.addProductToCartByName(PRODUCT_NAMES.BIKE_LIGHT);
 
@@ -98,7 +92,7 @@ test.describe('SauceDemo - Complete Purchase Flow', () => {
     expect(await cartPage.getCartItemCount()).toBe(1);
   });
 
-  test('should show error when missing checkout information', async ({
+  test("should show error when missing checkout information", async ({
     productsPage,
     navigationBar,
     cartPage,

@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page } from "@playwright/test";
 
 export class BasePage {
   readonly page: Page;
@@ -7,12 +7,11 @@ export class BasePage {
     this.page = page;
   }
 
-  async goto(path: string = ''): Promise<void> {
-    await this.page.goto(path || '/');
+  async goto(path: string = ""): Promise<void> {
+    await this.page.goto(path || "/");
   }
 
   async getCurrentUrl(): Promise<string> {
     return this.page.url();
   }
-
 }

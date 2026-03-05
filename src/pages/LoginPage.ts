@@ -1,7 +1,7 @@
-import { Page, Locator } from '@playwright/test';
-import { expect } from '@playwright/test';
-import { BasePage } from './BasePage';
-import { ProductsPage } from './ProductsPage';
+import { Page, Locator } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { BasePage } from "./BasePage";
+import { ProductsPage } from "./ProductsPage";
 
 export class LoginPage extends BasePage {
   readonly usernameInput: Locator;
@@ -22,11 +22,11 @@ export class LoginPage extends BasePage {
     await this.passwordInput.fill(password);
     await this.loginButton.click();
     await this.page.waitForLoadState();
-    return new ProductsPage(this.page); 
+    return new ProductsPage(this.page);
   }
 
   async getErrorMessage(): Promise<string> {
-    return await this.errorMessage.textContent() ||'';
+    return (await this.errorMessage.textContent()) || "";
   }
 
   async isErrorMessageVisible(): Promise<boolean> {
@@ -50,7 +50,7 @@ export class LoginPage extends BasePage {
   }
 
   async expectErrorMessageToContain(expectedText: string) {
-    await expect(this.errorMessage).toBeVisible(); 
-    await expect(this.errorMessage).toContainText(expectedText); 
-}
+    await expect(this.errorMessage).toBeVisible();
+    await expect(this.errorMessage).toContainText(expectedText);
+  }
 }

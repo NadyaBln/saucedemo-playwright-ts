@@ -1,5 +1,5 @@
-import { Page, Locator, expect } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { Page, Locator, expect } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
 export class CartPage extends BasePage {
   readonly cartContainer: Locator;
@@ -21,9 +21,7 @@ export class CartPage extends BasePage {
     this.cartItemPrice = page.locator(".inventory_item_price");
     this.cartItemQuantity = page.locator(".cart_quantity");
     this.removeButton = page.locator('button[data-test*="remove"]');
-    this.continueShoppingButton = page.locator(
-      '[data-test="continue-shopping"]',
-    );
+    this.continueShoppingButton = page.locator('[data-test="continue-shopping"]');
     this.checkoutButton = page.locator('[data-test="checkout"]');
     this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
     this.pageTitle = page.locator('[data-test="title"]');
@@ -50,7 +48,7 @@ export class CartPage extends BasePage {
 
   async removeItemFromCartByName(productName: string): Promise<void> {
     const item = this.page.locator(`.cart_item:has-text("${productName}")`);
-   await item.locator('button[data-test*="remove"]').click();
+    await item.locator('button[data-test*="remove"]').click();
   }
 
   async removeItemFromCartByIndex(index: number): Promise<void> {
@@ -64,17 +62,17 @@ export class CartPage extends BasePage {
   }
 
   async continueShopping(): Promise<void> {
-    await (this.continueShoppingButton).click();
+    await this.continueShoppingButton.click();
     await this.page.waitForLoadState();
   }
 
   async proceedToCheckout(): Promise<void> {
-    await (this.checkoutButton).click();
+    await this.checkoutButton.click();
     await this.page.waitForLoadState();
   }
 
   async isCheckoutButtonVisible(): Promise<boolean> {
-    return await (this.checkoutButton).isVisible();
+    return await this.checkoutButton.isVisible();
   }
 
   async getItemDetailsByName(productName: string) {

@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator } from "@playwright/test";
 
 export class NavigationBar {
   readonly page: Page;
@@ -15,12 +15,12 @@ export class NavigationBar {
     this.page = page;
     this.cartIcon = page.locator('[data-test="shopping-cart-link"]');
     this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
-    this.menuButton = page.locator('#react-burger-menu-btn');
-    this.menu = page.locator('.bm-menu-wrap');
-    this.logoutLink = page.locator('#logout_sidebar_link');
-    this.resetAppLink = page.locator('#reset_sidebar_link');
-    this.aboutLink = page.locator('#about_sidebar_link');
-    this.allItemsLink = page.locator('#inventory_sidebar_link');
+    this.menuButton = page.locator("#react-burger-menu-btn");
+    this.menu = page.locator(".bm-menu-wrap");
+    this.logoutLink = page.locator("#logout_sidebar_link");
+    this.resetAppLink = page.locator("#reset_sidebar_link");
+    this.aboutLink = page.locator("#about_sidebar_link");
+    this.allItemsLink = page.locator("#inventory_sidebar_link");
   }
 
   async clickOnCart(): Promise<void> {
@@ -29,7 +29,7 @@ export class NavigationBar {
   }
 
   async getCartBadgeCount(): Promise<number> {
-    const badgeText = await this.cartBadge.textContent()?? '0';
+    const badgeText = (await this.cartBadge.textContent()) ?? "0";
     return parseInt(badgeText, 10);
   }
 

@@ -14,13 +14,13 @@ npx playwright install
 npm test
 ```
 
-| Script | Description |
-|--------|-------------|
-| `npm test` | Run all tests |
+| Script                | Description              |
+| --------------------- | ------------------------ |
+| `npm test`            | Run all tests            |
 | `npm run test:headed` | Run with visible browser |
-| `npm run test:ui` | Playwright UI mode |
-| `npm run test:debug` | Debug mode |
-| `npm run report` | Open HTML report |
+| `npm run test:ui`     | Playwright UI mode       |
+| `npm run test:debug`  | Debug mode               |
+| `npm run report`      | Open HTML report         |
 
 ## Project Structure
 

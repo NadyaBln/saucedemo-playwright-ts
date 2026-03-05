@@ -1,13 +1,11 @@
-import { expect } from '@playwright/test';
-import { AxeBuilder } from '@axe-core/playwright';
-import { test } from '../fixtures/auth.fixture';
-import { PRODUCT_NAMES, SORT_OPTIONS } from '../../src/utils/testData';
-import { TestUtils } from '../../src/utils/TestUtils';
+import { expect } from "@playwright/test";
+import { AxeBuilder } from "@axe-core/playwright";
+import { test } from "../fixtures/auth.fixture";
+import { PRODUCT_NAMES, SORT_OPTIONS } from "../../src/utils/testData";
+import { TestUtils } from "../../src/utils/TestUtils";
 
-test.describe('SauceDemo - Products Tests', () => {
-  test("should display all products on products page", async ({
-    productsPage,
-  }) => {
+test.describe("SauceDemo - Products Tests", () => {
+  test("should display all products on products page", async ({ productsPage }) => {
     await expect(productsPage.productContainer).toBeVisible();
 
     const productCount = await productsPage.getProductCount();
@@ -25,10 +23,7 @@ test.describe('SauceDemo - Products Tests', () => {
     },
   );
 
-  test("should add multiple products to cart", async ({
-    productsPage,
-    navigationBar,
-  }) => {
+  test("should add multiple products to cart", async ({ productsPage, navigationBar }) => {
     await productsPage.addProductToCartByName(PRODUCT_NAMES.BACKPACK);
     await productsPage.addProductToCartByName(PRODUCT_NAMES.BIKE_LIGHT);
     await productsPage.addProductToCartByName(PRODUCT_NAMES.BOLT_TSHIRT);
@@ -57,9 +52,7 @@ test.describe('SauceDemo - Products Tests', () => {
     expect(productNames.length).toBe(productPrices.length);
   });
 
-  test("should sort products by price low to high", async ({
-    productsPage,
-  }) => {
+  test("should sort products by price low to high", async ({ productsPage }) => {
     await productsPage.sortProductsBy(SORT_OPTIONS.LOW_TO_HIGH);
 
     const prices = await productsPage.getAllProductPrices();
@@ -71,12 +64,8 @@ test.describe('SauceDemo - Products Tests', () => {
   });
 
   //accessibility test
-  test("products page has no critical a11y violations", async ({
-    productsPage,
-  }) => {
+  test("products page has no critical a11y violations", async ({ productsPage }) => {
     const results = await new AxeBuilder({ page: productsPage.page }).analyze();
-    expect(
-      results.violations.filter((v) => v.impact === "critical"),
-    ).toHaveLength(0);
+    expect(results.violations.filter((v) => v.impact === "critical")).toHaveLength(0);
   });
 });
