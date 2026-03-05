@@ -16,7 +16,7 @@ test.describe("SauceDemo - Login Tests", () => {
       TEST_CREDENTIALS.VALID_USER.password,
     );
 
-    await productsPage.expectToBeLoaded();
+    await expect(productsPage.productContainer).toBeVisible();
   });
 
   test("should display error message with locked out user", async ({ page }) => {
@@ -25,11 +25,13 @@ test.describe("SauceDemo - Login Tests", () => {
       TEST_CREDENTIALS.LOCKED_USER.password,
     );
 
-    await loginPage.expectErrorMessageToContain(ERROR_MESSAGES.LOCKED_OUT_USER_ERROR);
+    await expect(loginPage.errorMessage).toBeVisible();
+    await expect(loginPage.errorMessage).toContainText(ERROR_MESSAGES.LOCKED_OUT_USER_ERROR);
   });
 
   test("should show error for invalid credentials", async () => {
     await loginPage.login("invalid_user", "invalid_password");
+
     await expect(loginPage.errorMessage).toBeVisible();
     await expect(loginPage.errorMessage).toContainText(ERROR_MESSAGES.INVALID_CREDENTIALS_ERROR);
   });

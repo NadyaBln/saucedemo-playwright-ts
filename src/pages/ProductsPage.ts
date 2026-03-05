@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class ProductsPage extends BasePage {
@@ -81,9 +80,5 @@ export class ProductsPage extends BasePage {
     const price = await product.locator(".inventory_item_price").textContent();
 
     return { name, description, price };
-  }
-
-  async expectToBeLoaded() {
-    await expect(this.productContainer).toBeVisible();
   }
 }

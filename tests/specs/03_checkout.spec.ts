@@ -15,13 +15,13 @@ test.describe("SauceDemo - Complete Purchase Flow", () => {
 
     // Go to cart
     await navigationBar.clickOnCart();
-    await cartPage.expectToBeLoaded();
+    await expect(cartPage.cartContainer).toBeVisible();
     const cartItemCount = await cartPage.getCartItemCount();
     expect(cartItemCount).toBe(1);
 
     // Proceed to checkout
     await cartPage.proceedToCheckout();
-    expect(await checkoutPage.isCheckoutStepOneVisible()).toBeTruthy();
+    await expect(checkoutPage.firstNameInput).toBeVisible();
 
     // Fill checkout information
     await checkoutPage.completeCheckoutStepOne(
@@ -29,7 +29,7 @@ test.describe("SauceDemo - Complete Purchase Flow", () => {
       CHECKOUT_INFO.VALID_INFO.lastName,
       CHECKOUT_INFO.VALID_INFO.zipCode,
     );
-    expect(await checkoutPage.isCheckoutStepTwoVisible()).toBeTruthy();
+    await expect(checkoutPage.finishButton).toBeVisible();
 
     // Verify order summary
     const itemsTotal = await checkoutPage.getItemTotal();
@@ -37,7 +37,7 @@ test.describe("SauceDemo - Complete Purchase Flow", () => {
 
     // Finish order
     await checkoutPage.finishCheckout();
-    await confirmationPage.expectToBeLoaded();
+    await expect(confirmationPage.confirmationContainer).toBeVisible();
 
     const confirmationText = await confirmationPage.getConfirmationHeaderText();
     expect(confirmationText.toLowerCase()).toContain(SUCCESS_MESSAGES.ORDER_COMPLETE.toLowerCase());
@@ -106,6 +106,6 @@ test.describe("SauceDemo - Complete Purchase Flow", () => {
     await checkoutPage.continueToStepTwo();
 
     // Should still be on step one with error
-    expect(await checkoutPage.isErrorMessageVisible()).toBeTruthy();
+    await expect(checkoutPage.errorMessage).toBeVisible();
   });
 });
