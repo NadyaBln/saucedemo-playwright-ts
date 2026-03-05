@@ -1,6 +1,6 @@
 # SauceDemo Playwright TypeScript
 
-E2E tests for [SauceDemo](https://www.saucedemo.com/) using Playwright + TypeScript with Page Object Model.
+E2E tests for [SauceDemo](https://www.saucedemo.com/) using Playwright + TypeScript with Page Object Model
 
 ## Tech Stack
 
