@@ -1,7 +1,6 @@
-import { Page } from '@playwright/test';
+import { Page } from "@playwright/test";
 
 export class TestUtils {
-
   static async wait(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -12,8 +11,8 @@ export class TestUtils {
   }
 
   static generateRandomString(length: number = 10): string {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
     for (let i = 0; i < length; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -48,7 +47,7 @@ export class TestUtils {
   static async retryWithExponentialBackoff<T>(
     fn: () => Promise<T>,
     maxRetries: number = 3,
-    initialDelayMs: number = 1000
+    initialDelayMs: number = 1000,
   ): Promise<T> {
     let lastError: Error | null = null;
 
@@ -64,13 +63,13 @@ export class TestUtils {
       }
     }
 
-    throw lastError || new Error('Max retries exceeded');
+    throw lastError || new Error("Max retries exceeded");
   }
 
   static async getPageConsoleMessages(page: Page): Promise<string[]> {
     const messages: string[] = [];
 
-    page.on('console', (msg) => {
+    page.on("console", (msg) => {
       messages.push(msg.text());
     });
 
@@ -78,7 +77,7 @@ export class TestUtils {
   }
 
   static setupAlertHandler(page: Page, autoAccept: boolean = true): void {
-    page.on('dialog', async (dialog) => {
+    page.on("dialog", async (dialog) => {
       console.log(`Dialog type: ${dialog.type()}, message: ${dialog.message()}`);
       if (autoAccept) {
         await dialog.accept();
@@ -100,7 +99,7 @@ export class TestUtils {
   static removeDuplicates<T>(array: T[]): T[] {
     return [...new Set(array)];
   }
-  
+
   static sortPrices(prices: string[], ascending: boolean = true): string[] {
     return [...prices].sort((a, b) => {
       const numA = this.extractPrice(a);

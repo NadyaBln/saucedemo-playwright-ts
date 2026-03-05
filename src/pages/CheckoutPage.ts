@@ -1,5 +1,5 @@
-import { Page, Locator } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { Page, Locator } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
 export class CheckoutPage extends BasePage {
   // Locators - Step One
@@ -36,21 +36,21 @@ export class CheckoutPage extends BasePage {
     this.total = page.locator('[data-test="total-label"]');
     this.finishButton = page.locator('[data-test="finish"]');
     this.backButton = page.locator('[data-test="back-to-products"]');
-    this.cartItems = page.locator('.cart_item');
+    this.cartItems = page.locator(".cart_item");
   }
 
   async navigateToCheckoutStepOne(): Promise<void> {
-    await this.goto('/checkout-step-one.html');
+    await this.goto("/checkout-step-one.html");
   }
 
   async navigateToCheckoutStepTwo(): Promise<void> {
-    await this.goto('/checkout-step-two.html');
+    await this.goto("/checkout-step-two.html");
   }
 
   async fillCheckoutInformation(
     firstName: string,
     lastName: string,
-    zipCode: string
+    zipCode: string,
   ): Promise<void> {
     await this.firstNameInput.fill(firstName);
     await this.lastNameInput.fill(lastName);
@@ -65,14 +65,14 @@ export class CheckoutPage extends BasePage {
   async completeCheckoutStepOne(
     firstName: string,
     lastName: string,
-    zipCode: string
+    zipCode: string,
   ): Promise<void> {
     await this.fillCheckoutInformation(firstName, lastName, zipCode);
     await this.continueToStepTwo();
   }
 
   async getErrorMessage(): Promise<string> {
-    return await this.errorMessage.textContent()||'';
+    return (await this.errorMessage.textContent()) || "";
   }
 
   async isErrorMessageVisible(): Promise<boolean> {
@@ -85,15 +85,15 @@ export class CheckoutPage extends BasePage {
   }
 
   async getItemTotal(): Promise<string> {
-    return await this.itemTotal.textContent()||'';
+    return (await this.itemTotal.textContent()) || "";
   }
 
   async getTax(): Promise<string> {
-    return await this.tax.textContent() || "";
+    return (await this.tax.textContent()) || "";
   }
 
   async getTotal(): Promise<string> {
-    return await this.total.textContent() || "";
+    return (await this.total.textContent()) || "";
   }
   async finishCheckout(): Promise<void> {
     await this.finishButton.click();
@@ -114,7 +114,7 @@ export class CheckoutPage extends BasePage {
   }
 
   async getCartItemsCountStepTwo(): Promise<number> {
-    const items = await this.page.locator('.cart_item').all();
+    const items = await this.page.locator(".cart_item").all();
     return items.length;
   }
 

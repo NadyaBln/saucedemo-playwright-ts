@@ -1,6 +1,6 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator } from "@playwright/test";
 import { expect } from "@playwright/test";
-import { BasePage } from './BasePage';
+import { BasePage } from "./BasePage";
 
 export class ProductsPage extends BasePage {
   readonly productContainer: Locator;
@@ -35,7 +35,7 @@ export class ProductsPage extends BasePage {
   }
 
   async getAllProductPrices(): Promise<string[]> {
-   return this.productPrice.allTextContents();
+    return this.productPrice.allTextContents();
   }
 
   async addProductToCartByName(productName: string): Promise<void> {
@@ -58,12 +58,12 @@ export class ProductsPage extends BasePage {
   }
 
   async getCartItemCount(): Promise<number> {
-    const badgeText = await this.cartBadge.textContent()??'0';
+    const badgeText = (await this.cartBadge.textContent()) ?? "0";
     return parseInt(badgeText, 10);
   }
 
   async isCartBadgeVisible(): Promise<boolean> {
-    return await (this.cartBadge).isVisible();
+    return await this.cartBadge.isVisible();
   }
 
   async sortProductsBy(sortOption: string): Promise<void> {
@@ -75,13 +75,9 @@ export class ProductsPage extends BasePage {
   }
 
   async getProductDetailsByName(productName: string) {
-    const product = this.page.locator(
-      `.inventory_item:has-text("${productName}")`,
-    );
+    const product = this.page.locator(`.inventory_item:has-text("${productName}")`);
     const name = await product.locator(".inventory_item_name").textContent();
-    const description = await product
-      .locator(".inventory_item_desc")
-      .textContent();
+    const description = await product.locator(".inventory_item_desc").textContent();
     const price = await product.locator(".inventory_item_price").textContent();
 
     return { name, description, price };
