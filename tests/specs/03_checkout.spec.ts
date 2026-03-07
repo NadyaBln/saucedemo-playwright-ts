@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/auth.fixture";
 import { PRODUCT_NAMES, CHECKOUT_INFO, SUCCESS_MESSAGES } from "../../src/utils/testData";
+import { CheckoutDataBuilder } from "../../src/utils/CheckoutDataBuilder";
 
 test.describe("SauceDemo - Complete Purchase Flow", () => {
   test("should complete full purchase flow with single product", async ({
@@ -23,12 +24,15 @@ test.describe("SauceDemo - Complete Purchase Flow", () => {
     await cartPage.proceedToCheckout();
     await expect(checkoutPage.firstNameInput).toBeVisible();
 
+    // Create customer
+    const customer = new CheckoutDataBuilder()
+      .withFirstName(CHECKOUT_INFO.VALID_INFO.firstName)
+      .withLastName(CHECKOUT_INFO.VALID_INFO.lastName)
+      .withZip(CHECKOUT_INFO.VALID_INFO.zipCode)
+      .build();
+
     // Fill checkout information
-    await checkoutPage.completeCheckoutStepOne(
-      CHECKOUT_INFO.VALID_INFO.firstName,
-      CHECKOUT_INFO.VALID_INFO.lastName,
-      CHECKOUT_INFO.VALID_INFO.zipCode,
-    );
+    await checkoutPage.completeCheckoutStepOne(customer);
     await expect(checkoutPage.finishButton).toBeVisible();
 
     // Verify order summary
@@ -68,11 +72,15 @@ test.describe("SauceDemo - Complete Purchase Flow", () => {
 
     // Proceed to checkout
     await cartPage.proceedToCheckout();
-    await checkoutPage.completeCheckoutStepOne(
-      CHECKOUT_INFO.VALID_INFO.firstName,
-      CHECKOUT_INFO.VALID_INFO.lastName,
-      CHECKOUT_INFO.VALID_INFO.zipCode,
-    );
+
+    // Create customer
+    const customer = new CheckoutDataBuilder()
+      .withFirstName(CHECKOUT_INFO.VALID_INFO.firstName)
+      .withLastName(CHECKOUT_INFO.VALID_INFO.lastName)
+      .withZip(CHECKOUT_INFO.VALID_INFO.zipCode)
+      .build();
+
+    await checkoutPage.completeCheckoutStepOne(customer);
 
     // Verify all products are in checkout summary
     const checkoutItemCount = await checkoutPage.getCartItemsCountStepTwo();

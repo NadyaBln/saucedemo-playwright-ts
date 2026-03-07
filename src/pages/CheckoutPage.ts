@@ -1,5 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { CheckoutData } from "../utils/CheckoutDataBuilder";
 
 export class CheckoutPage extends BasePage {
   // Locators - Step One
@@ -47,27 +48,15 @@ export class CheckoutPage extends BasePage {
     await this.goto("/checkout-step-two.html");
   }
 
-  async fillCheckoutInformation(
-    firstName: string,
-    lastName: string,
-    zipCode: string,
-  ): Promise<void> {
-    await this.firstNameInput.fill(firstName);
-    await this.lastNameInput.fill(lastName);
-    await this.zipCodeInput.fill(zipCode);
-  }
-
   async continueToStepTwo(): Promise<void> {
     await this.continueButton.click();
     await this.page.waitForLoadState();
   }
 
-  async completeCheckoutStepOne(
-    firstName: string,
-    lastName: string,
-    zipCode: string,
-  ): Promise<void> {
-    await this.fillCheckoutInformation(firstName, lastName, zipCode);
+  async completeCheckoutStepOne(customer: CheckoutData): Promise<void> {
+    await this.firstNameInput.fill(customer.firstName);
+    await this.lastNameInput.fill(customer.lastName);
+    await this.zipCodeInput.fill(customer.zip);
     await this.continueToStepTwo();
   }
 
