@@ -38,19 +38,30 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
+      name: "ui-chromium",
       use: { ...devices["Desktop Chrome"] },
+      testDir: "./tests/ui",
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: "ui-firefox",
+      use: { ...devices["Desktop Firefox"] },
+      testDir: "./tests/ui",
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: "ui-webkit",
+      use: { ...devices["Desktop Safari"] },
+      testDir: "./tests/ui",
+    },
+
+    {
+      name: "api",
+      testDir: "./tests/api",
+      use: {
+        baseURL: "https://jsonplaceholder.typicode.com",
+      },
+    },
 
     /* Test against mobile viewports. */
     // {
