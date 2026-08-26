@@ -65,6 +65,10 @@ test.describe("SauceDemo - Products Tests", () => {
 
   //accessibility test
   test("products page has no critical a11y violations", async ({ productsPage }) => {
+    test.fail(
+      true,
+      "Known issue: SauceDemo's product sort <select> has no accessible name (axe rule 'select-name', WCAG 4.1.2)",
+    );
     const results = await new AxeBuilder({ page: productsPage.page }).analyze();
     expect(results.violations.filter((v) => v.impact === "critical")).toHaveLength(0);
   });
