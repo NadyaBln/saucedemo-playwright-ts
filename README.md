@@ -28,4 +28,8 @@ npm test
 
 Runs on GitHub Actions (push/PR to main). Report artifact uploaded on completion.
 
-> ⚠️ CI currently fails due to accessibility violations detected on SauceDemo pages.
+### Known issue (intentional, not a bug)
+
+The accessibility suite includes a real, reproducible finding: SauceDemo's product sort dropdown (`<select class="product_sort_container">`) has no accessible name — no `<label>`, `aria-label`, or `aria-labelledby` (axe rule [`select-name`](https://dequeuniversity.com/rules/axe/4.11/select-name), WCAG 4.1.2, Section 508). This is an issue on the site itself, not something fixable in this test suite.
+
+The test is marked with Playwright's `test.fail()` so it doesn't break the build, while staying active — if SauceDemo ever fixes this, the test will unexpectedly pass, which Playwright flags for review.
