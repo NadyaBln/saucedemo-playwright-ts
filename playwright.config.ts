@@ -32,7 +32,7 @@ export default defineConfig({
     trace: "on-first-retry",
     baseURL: "https://www.saucedemo.com",
     // headed locally, headless in CI
-    headless: !!process.env.CI,
+    // headless: !!process.env.CI,
   },
 
   /* Configure projects for major browsers */

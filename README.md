@@ -13,6 +13,12 @@ Playwright • TypeScript • POM • Builder pattern • Custom auth fixtures �
 ```
 npm install
 npx playwright install
+cp .env.example .env
+```
+
+Fill in .env with real SauceDemo test credentials (STANDARD_USER_USERNAME, LOCKED_USER_USERNAME, PROBLEM_USER_USERNAME, PERFORMANCE_GLITCH_USER_USERNAME, USER_PASSWORD), then:
+
+```
 npm test
 ```
 
