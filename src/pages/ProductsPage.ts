@@ -38,10 +38,8 @@ export class ProductsPage extends BasePage {
   }
 
   async addProductToCartByName(productName: string): Promise<void> {
-    const productLocator = this.page.locator(
-      `.inventory_item:has-text("${productName}") button[data-test*="add-to-cart"]`,
-    );
-    await productLocator.click();
+    const product = this.productItems.filter({ hasText: productName });
+    await product.locator('button[data-test*="add-to-cart"]').click();
   }
 
   async addProductToCartByIndex(index: number): Promise<void> {
@@ -50,10 +48,8 @@ export class ProductsPage extends BasePage {
   }
 
   async removeProductFromCartByName(productName: string): Promise<void> {
-    const removeLocator = this.page.locator(
-      `.inventory_item:has-text("${productName}") button[data-test*="remove"]`,
-    );
-    await removeLocator.click();
+    const remove = this.productItems.filter({ hasText: productName });
+    await remove.locator('button[data-test*="remove"]').click();
   }
 
   async getCartItemCount(): Promise<number> {

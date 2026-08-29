@@ -1,10 +1,6 @@
 import { Page } from "@playwright/test";
 
 export class TestUtils {
-  static async wait(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   static getCurrentDateTime(): string {
     const now = new Date();
     return now.toISOString();
@@ -42,28 +38,6 @@ export class TestUtils {
     const num1 = this.extractPrice(price1);
     const num2 = this.extractPrice(price2);
     return Math.abs(num1 - num2) <= tolerance;
-  }
-
-  static async retryWithExponentialBackoff<T>(
-    fn: () => Promise<T>,
-    maxRetries: number = 3,
-    initialDelayMs: number = 1000,
-  ): Promise<T> {
-    let lastError: Error | null = null;
-
-    for (let i = 0; i < maxRetries; i++) {
-      try {
-        return await fn();
-      } catch (error) {
-        lastError = error as Error;
-        if (i < maxRetries - 1) {
-          const delay = initialDelayMs * Math.pow(2, i);
-          await this.wait(delay);
-        }
-      }
-    }
-
-    throw lastError || new Error("Max retries exceeded");
   }
 
   static async getPageConsoleMessages(page: Page): Promise<string[]> {
